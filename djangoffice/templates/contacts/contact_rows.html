@@ -1,0 +1,10 @@
+<tr><th scope="row">Name:</th><td>{{ contact.full_name|escape }}</td></tr>
+<tr><th scope="row">Company name:</th><td>{{ contact.company_name|escape }}</td></tr>
+<tr><th scope="row">Position:</th><td>{{ contact.position|escape }}</td></tr>
+<tr><th scope="row">URL:</th><td>{% if contact.url %}<a href="{{ contact.url|escape }}">{{ contact.url|escape }}</a>{% else %}&nbsp;{% endif %}</td></tr>
+<tr><th scope="row">Notes:</th><td>{{ contact.notes|escape|linebreaks|default:"&nbsp;" }}</td></tr>
+<tr><th scope="row">Phone number:</th><td>{{ contact.phone_number|escape }}</td></tr>
+<tr><th scope="row">Mobile number:</th><td>{{ contact.mobile_number|escape|default:"&nbsp;" }}</td></tr>
+<tr><th scope="row">Fax number:</th><td>{{ contact.fax_number|escape|default:"&nbsp;" }}</td></tr>
+<tr><th scope="row">Email:</th><td><a href="mailto:{{ contact.email|escape }}">{{ contact.email|escape }}</a></td></tr>
+<tr><th scope="row">Address:</th><td>{{ contact.full_address|escape|linebreaksbr }}</td></tr>

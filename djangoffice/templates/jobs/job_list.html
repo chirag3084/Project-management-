@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Jobs | {% endblock %}
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/calendar.css" media="screen,projection">
+<script type="text/javascript" src="{{ MEDIA_URL }}js/Calendar.js"></script>
+{% endblock %}
+{% block menu %}{% menu "manage" "jobs" %}{% endblock %}
+{% block content %}
+<h1>Jobs</h1>
+
+<h2>Filters</h2>
+{% job_filter_form filter_form %}
+
+{% if job_list %}
+<table cellspacing="0" class="data">
+<thead>
+  <tr>
+{% table_header headers %}
+  </tr>
+</thead>
+<tbody>
+  {% for job in job_list %}<tr class="{% cycle odd,even %}">
+    <td><a href="{{ job.get_absolute_url }}">{{ job.formatted_number }}</a></td>
+    <td>{{ job.name|escape }}</td>
+    <td>{{ job.client.name|escape }}</td>
+    <td>{{ job.get_status_display|escape }}</td>
+  </tr>{% endfor %}
+</tbody>
+</table>
+{% else %}
+<h2>No Jobs found</h2>
+{% endif %}
+{% if user|is_admin_or_manager %}
+<div class="buttons">
+  <a href="{% url add_job %}"><img src="{{ MEDIA_URL }}img/add.png" alt=""> Add Job</a>
+</div>
+{% endif %}
+{% endblock %}
